@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
     #If they exsit, then checking if they know their password correctly
     if @user !=nil
       #Then we checking their password matched with the stored password -> Login successfully
-      if @user["password"] == params["password"]
-        flash["notice"] ="Welcome."
+      if BCrypt::Password.new(@user["password"]) == params["password"]
+        session["user_id"] = @user["id"]
+        flash["notice"] ="Welcome, #{@user["username"]}"
         redirect_to "/places"      
       else
         flash["notice"] ="Try Again."
@@ -24,6 +25,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # logout the user
+    session["user_id"] = nil
+    redirect_to "/login"
+    flash["notice"] = "Goodbye."
+
   end
 end
   
