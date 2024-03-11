@@ -3,7 +3,7 @@ class PlacesController < ApplicationController
   def index
     @user = User.find_by({"id" => session["user_id"]})
     if @user !=nil
-      @places = Place.all
+      @places = Place.where({"id" => session["user_id"]})
     else
       redirect_to "/login"
     end
