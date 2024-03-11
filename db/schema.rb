@@ -52,7 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_224355) do
 
   create_table "places", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
