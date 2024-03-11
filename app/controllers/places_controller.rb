@@ -31,6 +31,7 @@ class PlacesController < ApplicationController
     if @user !=nil
       @place = Place.new
       @place["name"] = params["name"]
+      @place[]
       @place.save
       redirect_to "/places"
     else
